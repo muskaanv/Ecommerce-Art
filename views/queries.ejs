@@ -1,0 +1,17 @@
+<%- include("partials/header"); -%>
+
+<body class="queries-body">
+    
+<%- include("partials/navbar"); -%>
+<div class="queries-container">
+    <br><br>
+    <h1>Ask Query</h1>
+    <br><br>
+    <textarea name="queryText" form="query-form" id="queryText" cols="80" rows="7" placeholder="Write here...."></textarea>
+    <form action="queries" method="POST" id="query-form">
+        <br><br>
+        <input type="submit" class="btn btn-lg btn-outline-dark" value="Submit">
+    </form>
+</div>
+
+<%- include("partials/footer"); -%>

@@ -1,0 +1,160 @@
+<%- include("partials/header"); -%>
+
+<body class="buy-body">
+
+    <%- include("partials/navbar"); -%>
+
+    <div class="buy-container">
+        <br><br><br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col col-lg-8">
+                    <div class="row">
+
+        
+                        <% items.forEach(item => { %>
+                        <div class="col-6">
+                            <div class="card" >
+                                <img id="im<%=item.id%>" class="card-img-top" src="/images/upload_images/<%= item.image %>"  alt="Card image cap">
+                                <div class="card-body">
+                                  <h5 class="card-title " id="title<%=item.id%>"><%= item.title %></h5>
+                                  <p class="card-text"><%= item.description %></p>
+                                  <span>Rs. </span><span><h6 class="price" id="price<%=item.id%>"><%= item.price %></h6></span>
+                                  
+                                  <br>
+                                  <button  class="add-to-cart btn btn-primary" id="addToCart<%=item.id%>" onclick="AddToCart(this.id)">Add to Cart</button>
+                                    <input type="hidden" value="<%=item.id%>">
+                                </div>
+                              </div>  
+                              <br>  <br>  <br>  
+                        </div>
+                
+                        <% }) %>
+                    
+                    </div>
+                </div>
+                <div class="col col-lg-4">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_id">
+
+                        </tbody>
+                    </table>
+                    <label for="sum"><b> Total Amount :&emsp;</b></label>
+                    <span><b> Rs. </b></span><span><input type="text" name="sum" id="sum"></span>
+                    <br><br>
+                    <a href="cart"><button class="btn btn-outline-success">Checkout</button></a>
+                </div>
+            </div>
+            
+
+</div>
+    </div>
+
+    <script>
+        function AddToCart(clicked_id){
+            var button = document.getElementById(clicked_id).parentNode;
+
+            var title = button.querySelector("h5").textContent;
+            var price = button.querySelector("h6").textContent;
+            var table = document.getElementById("tbody_id");
+            var row = table.insertRow(-1);
+            let title_cell = row.insertCell(0);
+            let titleText = document.createTextNode(title);
+            title_cell.appendChild(titleText);
+            title_cell.setAttribute("class", "tit");
+            let price_cell = row.insertCell(1);
+            let priceText = document.createTextNode(price);
+            price_cell.appendChild(priceText);
+            price_cell.setAttribute("class", "pri");
+
+            var sel = document.createElement("select");
+            sel.setAttribute("name", "quantity");
+            sel.setAttribute("onchange", "Sum(this.value, this.parentNode.parentNode)");
+            var opt = document.createElement("option");
+            opt.setAttribute("value","");
+            opt.innerHTML = "Choose quantity";
+            sel.appendChild(opt);
+            var opt1 = document.createElement("option");
+            opt1.setAttribute("value", "1");
+            opt1.innerHTML = "1";
+            sel.appendChild(opt1);
+            var opt2 = document.createElement("option");
+            opt2.setAttribute("value", "2");
+            opt2.innerHTML = "2";
+            sel.appendChild(opt2);
+            var opt3 = document.createElement("option");
+            opt3.setAttribute("value", "3");
+            opt3.innerHTML = "3";
+            sel.appendChild(opt3);
+            var opt4 = document.createElement("option");
+            opt4.setAttribute("value", "4");
+            opt4.innerHTML = "4";
+            sel.appendChild(opt4);
+            var opt5 = document.createElement("option");
+            opt5.setAttribute("value", "5");
+            opt5.innerHTML = "5";
+            sel.appendChild(opt5);
+
+            let Quantity_cell = row.insertCell(2);
+            Quantity_cell.appendChild(sel);
+            Quantity_cell.setAttribute("class", "quan");
+
+            var tot = document.createElement("input");
+            let total_of_row = row.insertCell(3);
+            total_of_row.appendChild(tot);
+            tot.setAttribute("id", "tot");
+            tot.setAttribute("type", "text");
+            tot.setAttribute("name", "tot");
+            tot.setAttribute("class", "total-of-rows");
+
+            var remove = document.createElement("input");
+            remove.setAttribute("type", "button");
+            remove.setAttribute("class", "btn btn-outline-danger");
+            remove.setAttribute("onclick", "Delete(this.parentNode.parentNode.rowIndex)");
+            remove.setAttribute("value", "Remove");
+            let delete_cell = row.insertCell(4);
+            delete_cell.appendChild(remove);
+        }
+
+        function Delete(x){
+            document.getElementsByTagName("tr")[x].remove();
+            total();
+        }
+
+        function Sum(val, id){
+            var a = id.querySelector(".pri").textContent;
+            var p = parseInt(a);
+            var sum = val * p;
+            id.querySelector("#tot").value = sum;
+            total();
+        }
+
+        function total(){
+            var l = document.querySelectorAll(".total-of-rows");
+            var sum = 0;
+            if(l==0){
+                document.querySelector("#sum").value = sum;
+            }
+            for(let i=0; i<l.length; i++){
+                var c = l[i].value;
+                var d = parseInt(c);
+                sum = sum+d;
+                document.querySelector("#sum").value = sum;
+            }
+        }
+
+    </script>
+
+
+
+
+    <%- include("partials/footer"); -%>

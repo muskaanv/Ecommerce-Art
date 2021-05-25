@@ -1,0 +1,33 @@
+<%- include("partials/header"); -%>
+
+<body class="sell-body">
+
+    <%- include("partials/navbar"); -%>
+    
+    <div class="sell-container">
+        <form action="sell" method="POST" encType="multipart/form-data">
+
+            <label class="sell-label" for="title"><h6><b>Title</b></h6></label>
+            <br>
+            <input type="text" name="title" id="title" autocomplete="off" class="form-control"/>
+            <br>
+            <label class="sell-label"  for="description"><h6><b>Description</b></h6></label>
+            <br>
+            <input type="text" minlength="30" maxlength="200" size="200" name="description" autocomplete="off" id="description" class="form-control"/>
+            <br>
+            <label class="sell-label"  for="price"><h6><b>Price</b></h6></label>
+            <br>
+            <input type="text" name="price" id="price" class="form-control" autocomplete="off"/>
+            <br>
+            <label class="sell-label" for="images"><h6><b>Upload Images</b></h6></label>
+            <br>
+            <div class="image-upload">
+            <input type="file" name="sampleFile" id="sampleFile" accept="image/*"/>
+            </div>
+            <br> <br>
+            <button class="sell-button" type="submit">Submit</button>
+
+        </form>
+    </div>
+
+<%- include("partials/footer"); -%>

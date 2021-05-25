@@ -1,0 +1,29 @@
+<%- include("partials/header"); -%>
+
+<body class="registration-body">
+    <div class="registration-container">
+        <h1>Create an Account</h1>
+        <p>Kindly fill in the following details</p>
+        <br>
+        <form action="registration" method="post">
+            <div>
+                <input class="register-input" type="text" name="name" id="name" placeholder="Your Name" autocomplete="off">
+            </div>
+            <br>
+            <div>
+                <input class="register-input" type="email" name="email"  id="email" placeholder="Your Email" autocomplete="off">
+            </div>
+            <br>
+            <div>
+                <input class="register-input" type="password" name="password" id="password" placeholder="Password">
+            </div>
+            <br>
+            <div>
+                <input class="register-btn" type="submit" name="register" placeholder="Register">
+            </div>
+            <br> <br><br>
+            <a style="color: white;" href="login.html">Already have an account?</a>
+        </form>
+    </div>
+
+<%- include("partials/footer"); -%>
